@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import "../../styles/form.scss";
 
 const Form = () => {
@@ -11,6 +13,7 @@ const Form = () => {
     vendorSelector: "",
   });
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.userGenerator);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,13 +22,14 @@ const Form = () => {
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <label htmlFor="accountNumber">Account Number (16 numbers)</label>
+      <label htmlFor="accountNumber">Account Number (16 digits)</label>
       <input
         type="text"
         onChange={(e) =>
           setFormData({ ...formData, accountNumber: e.target.value })
         }
         value={formData.accountNumber}
+        inputMode="numeric"
         pattern="[0-9]{16}"
         id="accountNumber"
         name="accountNumber"
@@ -38,7 +42,14 @@ const Form = () => {
         onChange={(e) =>
           setFormData({ ...formData, accountName: e.target.value })
         }
-        value={formData.accountName}
+        value={
+          !user
+            ? formData.accountName
+            : user.map(
+                (item) =>
+                  `${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`
+              )
+        }
         id="accountName"
         name="accountName"
         className="input account-info"
@@ -57,7 +68,7 @@ const Form = () => {
           className="input expiry-cvc"
           required
         />
-        <label htmlFor="cvcNumber">CVC (3 numbers)</label>
+        <label htmlFor="cvcNumber">CVC (3 digits)</label>
         <input
           type="text"
           onChange={(e) =>

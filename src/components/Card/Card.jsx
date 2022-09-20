@@ -28,10 +28,16 @@ const Card = (props) => {
           </div>
         </div>
         <div className="center-container">
-          <p className="account-number">123456789101112</p>
+          <h6 className="subheading">Account Number</h6>
+          <p className="card-text-large">123456789101112</p>
+          <h6 className="subheading">Valid Thru</h6>
+          <p className="card-text-small">December 2030</p>
+          <h6 className="subheading">CVC</h6>
+          <p className="card-text-small">208</p>
         </div>
         <div className="bottom-container">
-          <p className="account-number">123456789101112</p>
+          <h6 className="subheading">Cardholder's Name</h6>
+          <p className="account-name">Patrizio Lunbdergo</p>
         </div>
       </div>
     </section>
