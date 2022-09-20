@@ -1,26 +1,47 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 90%;
+.main.addCards {
+  justify-content: flex-start;
 
-  label {
-    font-size: 12px;
+  .page-heading {
+    margin-top: 20px;
   }
 
-  .account-info {
-    width: 90%;
+  .active-card {
+    margin-bottom: 10px;
   }
 
-  .expiryCVC-container {
-    width: 90%;
+  .form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    .expiry-cvc {
-      width: 45%;
+    width: 300px;
+
+    label {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    input {
+      margin-bottom: 5px;
+    }
+
+    .account-info {
+      width: 90%;
+    }
+
+    .expiryCVC-container {
+      width: 300px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      .expiry-cvc {
+        width: 45%;
+      }
+    }
+
+    select {
+      margin-bottom: 10px;
     }
   }
 }
