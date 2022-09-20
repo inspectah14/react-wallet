@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addCard } from "../redux/cardSlice";
 import Card from "../components/Card/Card";
 import Form from "../components/Form/Form";
 
 const AddCards = () => {
-  const { user } = useSelector((state) => state.userGenerator);
+  const dispatch = useDispatch();
+  const { cards, id } = useSelector((state) => state.cardList);
+
+  const addCardFunc = (formData) => {
+    dispatch(addCard([...cards, formData]));
+  };
+
+  console.log(cards);
+  console.log(id);
 
   return (
     <main className="main addCards">
@@ -12,7 +21,7 @@ const AddCards = () => {
       <h3 className="section-heading">Preview Card</h3>
       <Card />
       <h3 className="section-heading">Card Information</h3>
-      <Form />
+      <Form addCardFunc={addCardFunc} />
       <Link to="/">
         <button>ADD CARD</button>
       </Link>

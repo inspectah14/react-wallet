@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import "../../styles/form.scss";
 
-const Form = () => {
+const Form = ({ addCardFunc }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [formData, setFormData] = useState({
     accountNumber: "",
@@ -25,6 +25,7 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // navigate("/");
+    addCardFunc(formData);
     console.log(formData);
   };
   return (
@@ -50,14 +51,15 @@ const Form = () => {
         onChange={(e) =>
           setFormData({ ...formData, accountName: e.target.value })
         }
-        value={
-          !user
-            ? formData.accountName
-            : user.map(
-                (item) =>
-                  `${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`
-              )
-        }
+        value={formData.accountName}
+        // value={
+        //   !user
+        //     ? formData.accountName
+        //     : user.map(
+        //         (item) =>
+        //           `${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`
+        //       )
+        // }
         id="accountName"
         name="accountName"
         className="input account-info"

@@ -3,7 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getUser = createAsyncThunk(
   "userGenerator" / "getUser",
   async () => {
-    let res = await fetch("https://randomuser.me/api/");
+    // Fetch currently wrong on purpose until value function is fixed on input accountName
+    let res = await fetch("https://randomuserrr.me/api/");
     let data = await res.json();
     return data.results;
   }
