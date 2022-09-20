@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import "../../styles/form.scss";
 
 const Form = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
   const [formData, setFormData] = useState({
     accountNumber: "",
     accountName: "",
@@ -14,6 +15,12 @@ const Form = () => {
   });
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userGenerator);
+
+  const handleClick = () => {
+    if (user) {
+      setIsDisabled(true);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +46,7 @@ const Form = () => {
       <label htmlFor="accountName">Cardholder Name</label>
       <input
         type="text"
+        onClick={handleClick}
         onChange={(e) =>
           setFormData({ ...formData, accountName: e.target.value })
         }
@@ -53,6 +61,7 @@ const Form = () => {
         id="accountName"
         name="accountName"
         className="input account-info"
+        disabled={isDisabled}
         required
       />
       <div className="expiryCVC-container">
