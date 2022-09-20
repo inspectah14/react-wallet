@@ -5,7 +5,6 @@ import Form from "../components/Form/Form";
 
 const AddCards = () => {
   const { user } = useSelector((state) => state.userGenerator);
-  user.map((item) => console.log(item.name.first));
 
   return (
     <main className="main addCards">

@@ -2,9 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getUser = createAsyncThunk(
   "userGenerator" / "getUser",
-  // async () => {
-  //   return fetch("https://randomuser.me/api/").then((res) => res.json());
-  // }
   async () => {
     let res = await fetch("https://randomuser.me/api/");
     let data = await res.json();
@@ -20,18 +17,16 @@ const userSlice = createSlice({
   },
   extraReducers: {
     [getUser.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.user = action.payload;
       state.status = "Found data!";
-      console.log(state.status);
     },
     [getUser.pending]: (state, action) => {
+      state.user = action.payload;
       state.status = "Loading data...";
-      console.log(state.status);
     },
     [getUser.rejected]: (state, action) => {
+      state.user = action.payload;
       state.status = "Failed to get data.";
-      console.log(state.status);
     },
   },
 });
