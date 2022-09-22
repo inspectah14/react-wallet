@@ -9,11 +9,10 @@ const AddCards = () => {
   const { cards, id } = useSelector((state) => state.cardList);
 
   const addCardFunc = (formData) => {
-    dispatch(addCard([...cards, formData]));
+    dispatch(addCard(formData));
   };
 
   console.log(cards);
-  console.log(id);
 
   return (
     <main className="main addCards">

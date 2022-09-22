@@ -26,7 +26,6 @@ const Form = ({ addCardFunc }) => {
     e.preventDefault();
     // navigate("/");
     addCardFunc(formData);
-    console.log(formData);
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -39,6 +38,7 @@ const Form = ({ addCardFunc }) => {
         value={formData.accountNumber}
         inputMode="numeric"
         pattern="[0-9]{16}"
+        maxLength={16}
         id="accountNumber"
         name="accountNumber"
         className="input account-info"
@@ -87,6 +87,7 @@ const Form = ({ addCardFunc }) => {
           }
           value={formData.cvcNumber}
           pattern="[0-9]{3}"
+          maxLength={3}
           id="cvcNumber"
           name="cvcNumber"
           className="input expiry-cvc"
@@ -102,6 +103,9 @@ const Form = ({ addCardFunc }) => {
         }
         value={formData.vendorSelector}
       >
+        <option value="" disabled>
+          Select Card Vendor
+        </option>
         <option value="Visa">VISA</option>
         <option value="Mastercard">MasterCard</option>
         <option value="Diners">Diner's Club</option>
