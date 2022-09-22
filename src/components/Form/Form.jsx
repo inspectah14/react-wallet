@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addCard } from "../../redux/cardSlice";
 
 import "../../styles/form.scss";
 
@@ -13,6 +14,7 @@ const Form = ({ addCardFunc }) => {
     cvcNumber: "",
     vendorSelector: "",
   });
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userGenerator);
 
@@ -24,8 +26,8 @@ const Form = ({ addCardFunc }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // navigate("/");
-    addCardFunc(formData);
+    dispatch(addCard(formData));
+    navigate("/");
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
