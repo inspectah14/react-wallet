@@ -5,6 +5,7 @@ import Form from "../components/Form/Form";
 
 const AddCards = () => {
   const { cards, id } = useSelector((state) => state.cardList);
+  console.log(cards);
 
   return (
     <main className="main addCards">

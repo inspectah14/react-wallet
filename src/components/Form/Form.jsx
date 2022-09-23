@@ -5,8 +5,10 @@ import { addCard } from "../../redux/cardSlice";
 
 import "../../styles/form.scss";
 
-const Form = ({ addCardFunc }) => {
-  const [isDisabled, setIsDisabled] = useState(false);
+const checkUser = () => {};
+
+const Form = () => {
+  // const [isDisabled, setIsDisabled] = useState(false);
   const [formData, setFormData] = useState({
     accountNumber: "",
     accountName: "",
@@ -17,12 +19,6 @@ const Form = ({ addCardFunc }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.userGenerator);
-
-  const handleClick = () => {
-    if (user) {
-      setIsDisabled(true);
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,23 +45,13 @@ const Form = ({ addCardFunc }) => {
       <label htmlFor="accountName">Cardholder Name</label>
       <input
         type="text"
-        onClick={handleClick}
         onChange={(e) =>
           setFormData({ ...formData, accountName: e.target.value })
         }
-        value={formData.accountName}
-        // value={
-        //   !user
-        //     ? formData.accountName
-        //     : user.map(
-        //         (item) =>
-        //           `${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`
-        //       )
-        // }
+        value={!user ? formData.accountName : (formData.accountName = user)}
         id="accountName"
         name="accountName"
         className="input account-info"
-        disabled={isDisabled}
         required
       />
       <div className="expiryCVC-container">
