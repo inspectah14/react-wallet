@@ -1,11 +1,12 @@
+import mastercardLogo from "../../assets/mastercard.png";
+import visaLogo from "../../assets/visa.png";
+import amexLogo from "../../assets/amex.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addCard } from "../../redux/cardSlice";
 
 import "../../styles/form.scss";
-
-const checkUser = () => {};
 
 const Form = () => {
   // const [isDisabled, setIsDisabled] = useState(false);
@@ -94,9 +95,9 @@ const Form = () => {
         <option value="" disabled>
           Select Card Vendor
         </option>
-        <option value="Visa">VISA</option>
-        <option value="Mastercard">MasterCard</option>
-        <option value="Diners">Diner's Club</option>
+        <option value={visaLogo}>VISA</option>
+        <option value={mastercardLogo}>MasterCard</option>
+        <option value={amexLogo}>American Express</option>
       </select>
       <button type="submit"> Add card </button>
     </form>

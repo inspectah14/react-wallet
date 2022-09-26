@@ -4,7 +4,7 @@ export const getUser = createAsyncThunk(
   "userGenerator" / "getUser",
   async () => {
     // Fetch currently wrong on purpose until value function is fixed on input accountName
-    let res = await fetch("https://randomuserrr.me/api/");
+    let res = await fetch("https://randomuser.me/api/");
     let data = await res.json();
     return data.results.map(
       (user) =>
