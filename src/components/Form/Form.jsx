@@ -11,7 +11,6 @@ import { addCard } from "../../redux/cardSlice";
 import "../../styles/form.scss";
 
 const Form = () => {
-  // const [isDisabled, setIsDisabled] = useState(false);
   const [formData, setFormData] = useState({
     accountNumber: "",
     accountName: "",
