@@ -5,6 +5,11 @@
   justify-content: center;
   width: 90%;
 
+  .click-container {
+    display: flex;
+    justify-content: center;
+  }
+
   .card-container {
     display: flex;
     flex-direction: column;
@@ -51,14 +56,29 @@
         margin-top: 10px;
 
         .vendor-logo {
-          height: 20px;
-          width: 30px;
+          height: 35px;
+          width: 50px;
         }
       }
     }
 
     .center-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 65px;
       width: 150px;
+
+      .center-bottom-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .cbc-right,
+        .cbc-left {
+          text-align: center;
+        }
+      }
     }
 
     .card-text-small {

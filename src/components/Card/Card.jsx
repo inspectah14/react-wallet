@@ -27,12 +27,20 @@ const Card = (props) => {
           </div>
         </div>
         <div className="center-container">
-          <h6 className="subheading">Account Number</h6>
-          <p className="card-text-large">{accountNumber}</p>
-          <h6 className="subheading">Valid Thru</h6>
-          <p className="card-text-small">{expiryDate}</p>
-          <h6 className="subheading">CVC</h6>
-          <p className="card-text-small">{cvcNumber}</p>
+          <div className="center-top-container">
+            <h6 className="subheading">Account Number</h6>
+            <p className="card-text-large">{accountNumber}</p>
+          </div>
+          <div className="center-bottom-container">
+            <div className="cbc-left">
+              <h6 className="subheading">Valid Thru</h6>
+              <p className="card-text-small">{expiryDate}</p>
+            </div>
+            <div className="cbc-right">
+              <h6 className="subheading">CVC</h6>
+              <p className="card-text-small">{cvcNumber}</p>
+            </div>
+          </div>
         </div>
         <div className="bottom-container">
           <h6 className="subheading">Cardholder's Name</h6>
