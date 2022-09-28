@@ -1,8 +1,6 @@
 import "../../styles/cards.scss";
 import chipIcon from "../../assets/card-chip-2.png";
 import contactLessIcon from "../../assets/contactless.png";
-import { useDispatch } from "react-redux";
-import { deleteCard } from "../../redux/cardSlice";
 
 const Card = (props) => {
   const {
@@ -11,12 +9,10 @@ const Card = (props) => {
     expiryDate,
     cvcNumber,
     vendorSelector,
-    inCardHolder,
+    inCardHolder = false,
     handleActivateBtn,
     handleDeleteBtn,
   } = props;
-
-  const dispatch = useDispatch();
 
   return (
     <section className="active-card">

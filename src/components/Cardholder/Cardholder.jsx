@@ -7,11 +7,13 @@ const Cardholder = ({ setActiveCard, activeCard }) => {
   const dispatch = useDispatch();
   const { cards, user } = useSelector((state) => state.cardList);
 
-  const handleClick = (id) => {
+  const handleClick = (e, id) => {
+    e.preventDefault();
     setActiveCard(cards[id]);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (e, id) => {
+    e.preventDefault();
     dispatch(deleteCard(id));
   };
 
@@ -31,8 +33,8 @@ const Cardholder = ({ setActiveCard, activeCard }) => {
               cvcNumber={card.cvcNumber}
               vendorSelector={card.vendorSelector}
               inCardHolder={true}
-              handleActivateBtn={() => handleClick(card.id)}
-              handleDeleteBtn={() => handleDelete(card.id)}
+              handleActivateBtn={(e) => handleClick(e, card.id)}
+              handleDeleteBtn={(e) => handleDelete(e, card.id)}
             />
           </div>
         </div>

@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addCard } from "../../redux/cardSlice";
-
 import "../../styles/form.scss";
 
 const Form = () => {
