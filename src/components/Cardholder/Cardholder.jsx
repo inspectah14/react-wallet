@@ -3,7 +3,7 @@ import "../../styles/cards.scss";
 import { useSelector } from "react-redux";
 
 const Cardholder = ({ setActiveCard, activeCard }) => {
-  const { cards } = useSelector((state) => state.cardList);
+  const { cards, user } = useSelector((state) => state.cardList);
 
   const handleClick = (i) => {
     setActiveCard(cards[i]);
@@ -19,7 +19,7 @@ const Cardholder = ({ setActiveCard, activeCard }) => {
         >
           <Card
             accountNumber={card.accountNumber}
-            accountName={card.accountName}
+            accountName={card.accountName || user}
             expiryDate={card.expiryDate}
             cvcNumber={card.cvcNumber}
             vendorSelector={card.vendorSelector}

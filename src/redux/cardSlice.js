@@ -23,9 +23,11 @@ const cardSlice = createSlice({
         expiryDate: "2024-01",
         cvcNumber: "111",
         vendorSelector: masterCardLogo,
+        activeCard: true,
       },
     ],
     user: [],
+    status: "No data",
     id: 0,
   },
   reducers: {
@@ -33,19 +35,28 @@ const cardSlice = createSlice({
       state.cards.push(action.payload);
       state.id += 1;
     },
+    addUser: (state, action) => {
+      state.cards.map((card) => {
+        return (card.accountName = action.payload);
+      });
+    },
   },
   extraReducers: {
     [getCardUser.pending]: (state, action) => {
-      state.user = action.payload;
+      state.status = "Loading";
     },
     [getCardUser.fulfilled]: (state, action) => {
+      state.status = "succeeded";
       state.user = action.payload;
+      state.cards.map((card) => {
+        return (card.accountName = action.payload);
+      });
     },
     [getCardUser.rejected]: (state, action) => {
-      state.user = action.payload;
+      state.status = "failed";
     },
   },
 });
 
-export const { addCard } = cardSlice.actions;
+export const { addCard, addUser } = cardSlice.actions;
 export default cardSlice.reducer;

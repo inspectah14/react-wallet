@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddCards from "./screens/AddCards";
 import Wallet from "./screens/Wallet";
-import { getCardUser } from "./redux/cardSlice";
+import { addUser, getCardUser } from "./redux/cardSlice";
 import "./App.scss";
 
 function App() {
   const dispatch = useDispatch();
+  const { cards, user } = useSelector((state) => state.cardList);
 
   useEffect(() => {
     dispatch(getCardUser());

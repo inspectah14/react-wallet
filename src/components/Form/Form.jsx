@@ -20,7 +20,7 @@ const Form = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.userGenerator);
+  const { user } = useSelector((state) => state.cardList);
 
   const handleSubmit = (e) => {
     e.preventDefault();
