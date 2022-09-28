@@ -11,7 +11,6 @@ const Wallet = () => {
   const [activeCard, setActiveCard] = useState(cards[0]);
 
   console.log(cards);
-  console.log(activeCard);
 
   return (
     <main className="main cards">
@@ -25,15 +24,21 @@ const Wallet = () => {
         vendorSelector={activeCard.vendorSelector}
       />
       <h3 className="section-heading">Cardholder</h3>
+      <Link to="/addcards">
+        <button className="btn-styling">ADD NEW CARD</button>
+      </Link>
       {cards.length > 1 ? (
         <Cardholder setActiveCard={setActiveCard} activeCard={activeCard} />
       ) : (
-        <h4>Add more cards to your wallet</h4>
+        <h4 className="error-heading">
+          There are no other cards in your wallet
+        </h4>
       )}
-      {cards.length >= 4 && <h4>You've reached the maximum amount of cards</h4>}
-      <Link to="/addcards">
-        <button>ADD NEW CARD</button>
-      </Link>
+      {cards.length >= 4 && (
+        <h4 className="error-heading">
+          You've reached the maximum amount of cards
+        </h4>
+      )}
     </main>
   );
 };

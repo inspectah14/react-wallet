@@ -109,7 +109,10 @@ const Form = () => {
           <option value={mastercardLogo}>MasterCard</option>
           <option value={amexLogo}>American Express</option>
         </select>
-        <button type="submit"> Add card </button>
+        <button type="submit" className="btn-styling">
+          {" "}
+          Add card{" "}
+        </button>
       </form>
     </>
   );
