@@ -1,10 +1,22 @@
 import "../../styles/cards.scss";
 import chipIcon from "../../assets/card-chip-2.png";
 import contactLessIcon from "../../assets/contactless.png";
+import { useDispatch } from "react-redux";
+import { deleteCard } from "../../redux/cardSlice";
 
 const Card = (props) => {
-  const { accountNumber, accountName, expiryDate, cvcNumber, vendorSelector } =
-    props;
+  const {
+    accountNumber,
+    accountName,
+    expiryDate,
+    cvcNumber,
+    vendorSelector,
+    inCardHolder,
+    handleActivateBtn,
+    handleDeleteBtn,
+  } = props;
+
+  const dispatch = useDispatch();
 
   return (
     <section className="active-card">
@@ -46,6 +58,12 @@ const Card = (props) => {
           <h6 className="subheading">Cardholder's Name</h6>
           <p className="account-name"> {accountName} </p>
         </div>
+        {inCardHolder && (
+          <div>
+            <button onClick={handleActivateBtn}>Activate Card</button>
+            <button onClick={handleDeleteBtn}>Delete Card</button>
+          </div>
+        )}
       </div>
     </section>
   );

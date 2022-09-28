@@ -15,6 +15,8 @@ const Wallet = () => {
 
   const [activeCard, setActiveCard] = useState(cards[0]);
 
+  console.log(cards);
+
   return (
     <main className="main cards">
       <h2 className="page-heading">E-Wallet</h2>
@@ -29,7 +31,12 @@ const Wallet = () => {
         />
       )}
       <h3 className="section-heading">Cardholder</h3>
-      <Cardholder setActiveCard={setActiveCard} activeCard={activeCard} />
+      {cards.length > 2 ? (
+        <Cardholder setActiveCard={setActiveCard} activeCard={activeCard} />
+      ) : (
+        <h4>Add more cards to your wallet</h4>
+      )}
+      {cards.length >= 4 && <h4>You've reached the maximum amount of cards</h4>}
       <Link to="/addcards">
         <button>ADD NEW CARD</button>
       </Link>

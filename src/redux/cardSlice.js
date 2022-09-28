@@ -24,21 +24,24 @@ const cardSlice = createSlice({
         cvcNumber: "111",
         vendorSelector: masterCardLogo,
         activeCard: true,
+        id: 0,
       },
     ],
+    latestId: 0,
     user: [],
     status: "No data",
-    id: 0,
   },
   reducers: {
     addCard: (state, action) => {
-      state.cards.push(action.payload);
-      state.id += 1;
+      if (state.cards.length <= 3) {
+        state.cards.push(action.payload);
+      } else {
+        alert("You cannot add more than 4 cards");
+      }
+      state.latestId += 1;
     },
-    addUser: (state, action) => {
-      state.cards.map((card) => {
-        return (card.accountName = action.payload);
-      });
+    deleteCard: (state, action) => {
+      state.cards = state.cards.filter((card) => card.id !== action.payload);
     },
   },
   extraReducers: {
@@ -58,5 +61,5 @@ const cardSlice = createSlice({
   },
 });
 
-export const { addCard, addUser } = cardSlice.actions;
+export const { addCard, deleteCard } = cardSlice.actions;
 export default cardSlice.reducer;

@@ -11,16 +11,17 @@ import { addCard } from "../../redux/cardSlice";
 import "../../styles/form.scss";
 
 const Form = () => {
+  const { user, latestId } = useSelector((state) => state.cardList);
   const [formData, setFormData] = useState({
     accountNumber: "",
     accountName: "",
     expiryDate: "",
     cvcNumber: "",
     vendorSelector: placeHolder,
+    id: latestId + 1,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.cardList);
 
   const handleSubmit = (e) => {
     e.preventDefault();
