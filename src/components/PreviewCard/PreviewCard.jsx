@@ -1,12 +1,8 @@
 import "../../styles/cards.scss";
 import chipIcon from "../../assets/card-chip-2.png";
 import contactLessIcon from "../../assets/contactless.png";
-import { useDispatch } from "react-redux";
-import { activateCard, deleteCard } from "../../redux/cardSlice";
 
-const Card = ({ cardProps }) => {
-  const dispatch = useDispatch();
-
+const PreviewCard = (props) => {
   const {
     accountNumber,
     accountName,
@@ -15,20 +11,11 @@ const Card = ({ cardProps }) => {
     vendorSelector,
     active,
     id,
-    color,
-  } = cardProps;
-
-  const activateHandler = () => {
-    dispatch(activateCard(cardProps));
-  };
-
-  const deleteHandler = () => {
-    dispatch(deleteCard(cardProps));
-  };
+  } = props;
 
   return (
     <section className="active-card">
-      <div className={`card-container ${color}`}>
+      <div className="card-container">
         <div className="top-container">
           <div className="top-container-left">
             <img src={chipIcon} className="chip-icon" alt="Card Chip" />
@@ -66,25 +53,9 @@ const Card = ({ cardProps }) => {
           <h6 className="subheading">Cardholder's Name</h6>
           <p className="account-name"> {accountName} </p>
         </div>
-        {!cardProps.active && (
-          <div>
-            <button
-              onClick={() => activateHandler()}
-              className="btn-cards activate"
-            >
-              Activate
-            </button>
-            <button
-              onClick={() => deleteHandler()}
-              className="btn-cards delete"
-            >
-              Delete
-            </button>
-          </div>
-        )}
       </div>
     </section>
   );
 };
 
-export default Card;
+export default PreviewCard;

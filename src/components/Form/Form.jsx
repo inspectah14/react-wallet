@@ -1,16 +1,20 @@
-import Card from "../Card/Card";
+import PreviewCard from "..//PreviewCard/PreviewCard";
 import placeHolder from "../../assets/placeholder.png";
 import mastercardLogo from "../../assets/mastercard.png";
 import visaLogo from "../../assets/visa.png";
 import amexLogo from "../../assets/amex.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addCard } from "../../redux/cardSlice";
 import "../../styles/form.scss";
 
 const Form = () => {
-  const { user, latestId } = useSelector((state) => state.cardList);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { cards, latestId } = useSelector((state) => state.cardList);
+  const { user } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     accountNumber: "",
     accountName: "",
@@ -18,18 +22,23 @@ const Form = () => {
     cvcNumber: "",
     vendorSelector: placeHolder,
     id: latestId + 1,
+    color: ["darkgreen", "midnightblue", "crimson"][
+      Math.floor(Math.random() * 4)
+    ],
   });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  let { name } = user.results[0];
+  let userName = `${name.first.toUpperCase()} ${name.last.toUpperCase()}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addCard(formData));
     navigate("/");
   };
+
   return (
     <>
-      <Card
+      <PreviewCard
         accountNumber={formData.accountNumber}
         accountName={formData.accountName}
         expiryDate={formData.expiryDate}
@@ -38,7 +47,7 @@ const Form = () => {
       />
       <h3 className="section-heading">Card Information</h3>
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="accountNumber">Account Number (16 digits)</label>
+        <label htmlFor="accountNumber">Account Number</label>
         <input
           type="text"
           onChange={(e) =>
@@ -59,39 +68,45 @@ const Form = () => {
           onChange={(e) =>
             setFormData({ ...formData, accountName: e.target.value })
           }
-          value={!user ? formData.accountName : (formData.accountName = user)}
+          value={
+            !user ? formData.accountName : (formData.accountName = userName)
+          }
           id="accountName"
           name="accountName"
           className="input account-info"
           required
         />
         <div className="expiryCVC-container">
-          <label htmlFor="expiryDate">Valid Thru</label>
-          <input
-            type="month"
-            onChange={(e) =>
-              setFormData({ ...formData, expiryDate: e.target.value })
-            }
-            value={formData.expiryDate}
-            id="expiryDate"
-            name="expiryDate"
-            className="input expiry-cvc"
-            required
-          />
-          <label htmlFor="cvcNumber">CVC (3 digits)</label>
-          <input
-            type="text"
-            onChange={(e) =>
-              setFormData({ ...formData, cvcNumber: e.target.value })
-            }
-            value={formData.cvcNumber}
-            pattern="[0-9]{3}"
-            maxLength={3}
-            id="cvcNumber"
-            name="cvcNumber"
-            className="input expiry-cvc"
-            required
-          />
+          <div className="date-container">
+            <label htmlFor="expiryDate">Valid Thru</label>
+            <input
+              type="month"
+              onChange={(e) =>
+                setFormData({ ...formData, expiryDate: e.target.value })
+              }
+              value={formData.expiryDate}
+              id="expiryDate"
+              name="expiryDate"
+              className="input expiry-cvc date"
+              required
+            />
+          </div>
+          <div className="cvc-container">
+            <label htmlFor="cvcNumber">CVC</label>
+            <input
+              type="text"
+              onChange={(e) =>
+                setFormData({ ...formData, cvcNumber: e.target.value })
+              }
+              value={formData.cvcNumber}
+              pattern="[0-9]{3}"
+              maxLength={3}
+              id="cvcNumber"
+              name="cvcNumber"
+              className="input expiry-cvc number"
+              required
+            />
+          </div>
         </div>
         <label htmlFor="vendorSelector">Vendor</label>
         <select
@@ -101,6 +116,7 @@ const Form = () => {
             setFormData({ ...formData, vendorSelector: e.target.value })
           }
           value={formData.vendorSelector}
+          className="vendor-selector"
         >
           <option value={placeHolder} disabled>
             Select Card Vendor
@@ -109,9 +125,8 @@ const Form = () => {
           <option value={mastercardLogo}>MasterCard</option>
           <option value={amexLogo}>American Express</option>
         </select>
-        <button type="submit" className="btn-styling">
-          {" "}
-          Add card{" "}
+        <button type="submit" className="btn-styling submit">
+          Add Card
         </button>
       </form>
     </>
