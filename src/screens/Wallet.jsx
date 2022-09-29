@@ -54,6 +54,11 @@ const Wallet = ({ user }) => {
             You've reached the maximum number of cards in wallet
           </h4>
         )}
+        {cards.length <= 1 && (
+          <h4 className="section-heading error">
+            Add more cards to your wallet
+          </h4>
+        )}
         {cards &&
           cards.map((card, i) =>
             !card.active ? <Card key={i} cardProps={card} /> : null
