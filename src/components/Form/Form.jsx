@@ -1,7 +1,7 @@
 import PreviewCard from "..//PreviewCard/PreviewCard";
 import placeHolder from "../../assets/placeholder.png";
 import mastercardLogo from "../../assets/mastercard.png";
-import visaLogo from "../../assets/visa.png";
+import visaLogo from "../../assets/visa-2.png";
 import amexLogo from "../../assets/amex.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
