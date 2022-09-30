@@ -1,19 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import cardSlice from "../redux/cardSlice";
 import { getUser } from "../redux/userSlice";
 import Wallet from "./Wallet";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { user, status } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!user) {
       dispatch(getUser());
     }
-  }, []);
+  }, [dispatch, user]);
 
   return (
     <main className="main cards">

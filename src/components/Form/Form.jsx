@@ -4,7 +4,7 @@ import mastercardLogo from "../../assets/mastercard.png";
 import visaLogo from "../../assets/visa.png";
 import amexLogo from "../../assets/amex.png";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addCard } from "../../redux/cardSlice";
 import "../../styles/form.scss";
@@ -12,8 +12,7 @@ import "../../styles/form.scss";
 const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { cards, latestId } = useSelector((state) => state.cardList);
+  const { latestId } = useSelector((state) => state.cardList);
   const { user } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     accountNumber: "",
@@ -23,7 +22,7 @@ const Form = () => {
     vendorSelector: placeHolder,
     id: latestId + 1,
     color: ["darkgreen", "midnightblue", "crimson"][
-      Math.floor(Math.random() * 4)
+      Math.floor(Math.random() * 3)
     ],
   });
 
@@ -40,7 +39,9 @@ const Form = () => {
     <>
       <PreviewCard
         accountNumber={formData.accountNumber}
-        accountName={formData.accountName}
+        accountName={
+          !user ? formData.accountName : (formData.accountName = userName)
+        }
         expiryDate={formData.expiryDate}
         cvcNumber={formData.cvcNumber}
         vendorSelector={formData.vendorSelector}

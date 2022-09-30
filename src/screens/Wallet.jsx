@@ -1,13 +1,10 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import masterCardLogo from "../assets/mastercard.png";
 import Card from "../components/Card/Card";
-import Cardholder from "../components/Cardholder/Cardholder";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/cards.scss";
 import { addCard } from "../redux/cardSlice";
 import { useEffect } from "react";
-import { getUser } from "../redux/userSlice";
 
 const Wallet = ({ user }) => {
   let { name } = user.results[0];
@@ -30,9 +27,7 @@ const Wallet = ({ user }) => {
       };
       dispatch(addCard(initialCard));
     }
-  }, []);
-
-  console.log(cards);
+  }, [cards.length, dispatch, name.first, name.last]);
 
   return (
     <div className="wallet-wrapper">
